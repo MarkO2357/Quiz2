@@ -118,7 +118,10 @@
                 <input type = "button" id = "quizChoice3" value = "選択肢" class = "button" accesskey = "3" onclick = "check(3)">
                 <input type = "button" id = "quizChoice4" value = "選択肢" class = "button" accesskey = "4" onclick = "check(0)">
                 `;
-            const startButton = '<input type = "button" id = "startbutton" value = "スタート" class = "button"  onclick = "start()">';
+            const startButton = `
+                <input type = "button" id = "startbutton" value = "スタート" class = "button"  onclick = "start()"><br>
+                <input type = "button" id = "backbutton" value = "メニューに戻る" class = "button"  onclick = "location.href='index.html'">
+                `;
             const divStartButton = document.getElementById("divstartbutton");
             const divChoices = document.getElementById("divchoices");
             const timeGaugeView = document.getElementById("timeGaugeView");
