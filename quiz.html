@@ -210,11 +210,12 @@
             //時間切れ
             const timeOut = function() {
                 clearTime[right + wrong] = 10000;
+                clearTime[quizes.length] += 10000;
                 scoreView.textContent = "不正解";
                 timeGaugeView.innerHTML = "";
                 wrong++;
                 out++;
-                if(right + wrong == quizes.length){
+                if(right + wrong == quizes.length - 1){
                     result();
                 } else if(wrong == MISS){
                     result();
@@ -233,6 +234,7 @@
                 chooseChoices();
                 divStartButton.innerHTML = "";
                 scoreView.textContent = "";
+                clearTime[quizes.length] = 0;
             };
 
             //結果表示
@@ -253,7 +255,6 @@
                     <th>時　間：</th><td>${time}秒</td>
                 </tr>`;
                 resultTable.innerHTML = resultContens;
-                clearTime[1 + quizes.length] = 0;
             };
         </script>
     </body>
