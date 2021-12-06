@@ -123,11 +123,11 @@
                 <input type = "button" id = "backbutton" value = "メニューに戻る" class = "button"  onclick = "location.href='index.html'">
                 `;
             const divStartButton = document.getElementById("divstartbutton");
-            const divChoices = document.getElementById("divchoices");
             const timeGaugeView = document.getElementById("timeGaugeView");
             const quizQuestion = document.getElementById("quizQuestion");
             const resultTable = document.getElementById("resultTable");
             const resultView = document.getElementById("resultView");
+            const divChoices = document.getElementById("divchoices");
             const gameStart = document.getElementById("startbutton");
             const scoreView = document.getElementById("scoreView");
 
@@ -135,16 +135,16 @@
             let quizes = JSON.parse(sessionStorage.getItem("array"));
 
             //出題順格納
-            let quiznum = [...Array(quizes.length)].map((_, i) => i);
+            let quiznum = [...Array(quizes.length - 1)].map((_, i) =>1 + i);
 
             //クリアタイム格納
-            let clearTime = [...Array(1 + quizes.length)];
-            clearTime[1 + quizes.length] = 0;
+            let clearTime = [...Array(quizes.length)];
+            clearTime[quizes.length] = 0;
 
             //ランダムな問題の表示
             const chooseQuestion = function() {
                 resultTable.innerHTML = "";
-                qnum = quizes.length;
+                qnum = quizes.length - 1;
                 while (qnum) {
                     s = Math.floor( Math.random() * qnum);
                     t = quiznum[--qnum];
@@ -188,7 +188,7 @@
             const check = function(ans) {
                 finished = new Date();
                 clearTime[right + wrong] = finished - started;
-                clearTime[1 + quizes.length] += finished - started;
+                clearTime[quizes.length] += finished - started;
                 timeGaugeView.innerHTML = "";
                 if (quizes[quiznum[right + wrong]][rightAnsewr[ans]] == quizes[quiznum[right + wrong]][4]) {
                     scoreView.textContent = "正解 " + (clearTime[right + wrong]/1000).toFixed(3) + "秒";
@@ -197,7 +197,7 @@
                     scoreView.textContent = "不正解 " + (clearTime[right + wrong]/1000).toFixed(3) + "秒";
                     wrong++;
                 }
-                if (right + wrong == quizes.length) {
+                if (right + wrong == quizes.length - 1) {
                     result();
                 } else if(wrong == MISS){
                     result();
@@ -241,7 +241,7 @@
                 divChoices.innerHTML = "";
                 divStartButton.innerHTML = startButton;
                 scoreView.textContent = "終了";
-                time = (clearTime[1 + quizes.length]/1000).toFixed(3);
+                time = (clearTime[quizes.length]/1000).toFixed(3);
                 const resultContens =
                 `<tr>
                     <th>正　解：</th><td>${right}回</td>
