@@ -144,9 +144,9 @@
             //ランダムな問題の表示
             const chooseQuestion = function() {
                 resultTable.innerHTML = "";
-                qnum = quizes.length - 1;
+                qnum = quiznum.length;
                 while (qnum) {
-                    s = Math.floor( Math.random() * qnum);
+                    s = Math.floor(Math.random() * qnum);
                     t = quiznum[--qnum];
                     quiznum[qnum] = quiznum[s];
                     quiznum[s] = t;
