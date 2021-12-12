@@ -15,25 +15,25 @@
                 -webkit-appearance  : none;
                 border-radius   : 0;
                 display         : inline;
-                border-radius   : 2%;                   /* 角丸       */
-                font-size       : 1rem;                 /* 文字サイズ */
-                text-align      : center;               /* 文字位置   */
-                cursor          : pointer;              /* カーソル   */
-                padding         : 15px;                 /* 余白       */
-                background      : #fff;               /* 背景色     */
-                color           : #00007f;            /* 文字色     */
-                line-height     : 1em;                  /* 1行の高さ  */
-                transition      : .3s;                  /* なめらか変化 */
-                border          : 2px solid #00007f;  /* 枠の指定   */
+                border-radius   : 2%;
+                font-size       : 1rem;
+                text-align      : center;
+                cursor          : pointer;
+                padding         : 15px;
+                background      : #fff;
+                color           : #00007f;
+                line-height     : 1em;
+                transition      : .3s;
+                border          : 2px solid #00007f;
                 font-weight     : bold;
                 margin          : 20 auto;
             }
             .button:hover {
-                color           : #fff;             /* 背景色     */
-                background      : #00007f;             /* 文字色     */
+                color           : #fff;
+                background      : #00007f;
             }
             .question,.show-result {
-                color           : #fff;             /* 文字色     */
+                color           : #fff;
             }
             .time-gauge {
                 animation       : progress 10000ms linear 1;
@@ -70,26 +70,26 @@
         <section>
             <div id = "quizQuestion" class="question">問題文</div>
             <div id = "divchoices">
-                <input type = "button" id = "quizChoice1" value = "選択肢" class = "button" accesskey = "1" onclick = "check(1)">
-                <input type = "button" id = "quizChoice2" value = "選択肢" class = "button" accesskey = "2" onclick = "check(2)">
-                <input type = "button" id = "quizChoice3" value = "選択肢" class = "button" accesskey = "3" onclick = "check(3)">
-                <input type = "button" id = "quizChoice4" value = "選択肢" class = "button" accesskey = "4" onclick = "check(0)">
+                <input type="button" id="quizChoice1" value="選択肢" class="button" accesskey="1" onclick="check(1)">
+                <input type="button" id="quizChoice2" value="選択肢" class="button" accesskey="2" onclick="check(2)">
+                <input type="button" id="quizChoice3" value="選択肢" class="button" accesskey="3" onclick="check(3)">
+                <input type="button" id="quizChoice4" value="選択肢" class="button" accesskey="4" onclick="check(0)">
             </div>
-            <div id = "divstartbutton">
+            <div id="divstartbutton">
                 <!--<input type = "button" id = "startbutton" value = "スタート" class = "button"  onclick = "start()">-->
             </div>
-            <div id = "scoreView" class="question">
+            <div id="scoreView" class="question">
                 <!--<div class="time-gauge" onanimationend="timeOut()"></div>-->
             </div>
         </section>
 
-        <section id = "resultView" class = "show-result">
-            <div class = "size"><table id = "resultTable"></table></div>
+        <section id="resultView" class="show-result">
+            <div class="size"><table id="resultTable"></table></div>
         </section>
 
-        <div id = "timeGaugeView"></div>
+        <div id="timeGaugeView"></div>
 
-        <script language="javascript" type = "text/javascript">
+        <script language="javascript" type="text/javascript">
 
             //使う変数
             let finished = 0;
@@ -113,14 +113,14 @@
             const MISS = 3;
             const timeGauge = '<div class="time-gauge" onanimationend="timeOut()"></div>';
             const choices = `
-                <input type = "button" id = "quizChoice1" value = "選択肢" class = "button" accesskey = "1" onclick = "check(1)">
-                <input type = "button" id = "quizChoice2" value = "選択肢" class = "button" accesskey = "2" onclick = "check(2)">
-                <input type = "button" id = "quizChoice3" value = "選択肢" class = "button" accesskey = "3" onclick = "check(3)">
-                <input type = "button" id = "quizChoice4" value = "選択肢" class = "button" accesskey = "4" onclick = "check(0)">
+                <input type="button" id="quizChoice1" value="選択肢" class="button" accesskey="1" onclick="check(1)">
+                <input type="button" id="quizChoice2" value="選択肢" class="button" accesskey="2" onclick="check(2)">
+                <input type="button" id="quizChoice3" value="選択肢" class="button" accesskey="3" onclick="check(3)">
+                <input type="button" id="quizChoice4" value="選択肢" class="button" accesskey="4" onclick="check(0)">
                 `;
             const startButton = `
                 <input type = "button" id = "startbutton" value = "スタート" class = "button"  onclick = "start()"><br>
-                <input type = "button" id = "backbutton" value = "メニューに戻る" class = "button"  onclick = "location.href='index.html'">
+                <input type = "button" id = "backbutton" value = "メニューに戻る" class = "button"  onclick = "location.href='index_v2.html'">
                 `;
             const divStartButton = document.getElementById("divstartbutton");
             const timeGaugeView = document.getElementById("timeGaugeView");
@@ -144,7 +144,7 @@
             //ランダムな問題の表示
             const chooseQuestion = function() {
                 resultTable.innerHTML = "";
-                qnum = quiznum.length;
+                qnum = quizes.length - 1;
                 while (qnum) {
                     s = Math.floor(Math.random() * qnum);
                     t = quiznum[--qnum];
@@ -154,8 +154,8 @@
             };
 
             //ランダムな整数を生成
-            const getRandomInt = function(max) {
-                return Math.floor(Math.random() * max);
+            const getRandomInt = function(integer) {
+                return Math.floor(Math.random() * integer);
             };
 
             //ランダムな選択肢の表示
