@@ -15,25 +15,25 @@
                 -webkit-appearance  : none;
                 border-radius   : 0;
                 display         : inline;
-                border-radius   : 2%;                   /* 角丸       */
-                font-size       : 1rem;                 /* 文字サイズ */
-                text-align      : center;               /* 文字位置   */
-                cursor          : pointer;              /* カーソル   */
-                padding         : 15px;                 /* 余白       */
-                background      : #fff;               /* 背景色     */
-                color           : #00007f;            /* 文字色     */
-                line-height     : 1em;                  /* 1行の高さ  */
-                transition      : .3s;                  /* なめらか変化 */
-                border          : 2px solid #00007f;  /* 枠の指定   */
+                border-radius   : 2%;
+                font-size       : 1rem;
+                text-align      : center;
+                cursor          : pointer;
+                padding         : 15px;
+                background      : #fff;
+                color           : #00007f;
+                line-height     : 1em;
+                transition      : .3s;
+                border          : 2px solid #00007f;
                 font-weight     : bold;
                 margin          : 20 auto;
             }
             .button:hover {
-                color           : #fff;             /* 背景色     */
-                background      : #00007f;             /* 文字色     */
+                color           : #fff;
+                background      : #00007f;
             }
             .question,.show-result {
-                color           : #fff;             /* 文字色     */
+                color           : #fff;
             }
             .time-gauge {
                 animation       : progress 10000ms linear 1;
@@ -67,33 +67,45 @@
         </style>
     </head>
     <body>
-        <input type = "button" value = "問題1" class = "button" onclick = "session(0);location.href='quiz.html'">
-        <input type = "button" value = "問題2" class = "button" onclick = "session(1);location.href='quiz.html'">
-        <input type = "button" value = "確認用" class = "button" onclick = "session(2);location.href='quiz.html'">
+        <input type="button" value="問題1" class="button" onclick="session(0);location.href='quiz.html'">
+        <input type="button" value="問題2" class="button" onclick="session(1);location.href='quiz.html'">
+        <input type="button" value="確認用" class="button" onclick="session(2);location.href='quiz.html'">
         <div id="newer"></div>
         <script>
+            const newer = document.getElementById("newer");
+            let newQuestion = "";
             const questions = [
                 [
                     "問題1",
-                    ["墾田永年私財法","聖徳太子","東京都","国会","東京都","日本の首都は？"],
-                    ["ばなな","みかん","いちご","ぶどう","いちご","赤い色の果実は？"],
-                    ["りんご","みかん","ばなな","ぶどう","りんご","赤い色の果実は？"],
-                    ["りんご","みかん","いちご","ぶどう","ぶどう","紫色の果実は？"],
-                    ["ばなな","みかん","いちご","ぶどう","ばなな","黄色の果実は？"]
+                    ["墾田永年私財法", "聖徳太子", "東京都", "国会", "東京都", "日本の首都は？"],
+                    ["ばなな", "みかん", "いちご", "ぶどう", "いちご", "赤い色の果実は？"],
+                    ["りんご", "みかん", "ばなな", "ぶどう", "りんご", "赤い色の果実は？"],
+                    ["りんご", "みかん", "いちご", "ぶどう", "ぶどう", "紫色の果実は？"],
+                    ["ばなな", "みかん", "いちご", "ぶどう", "ばなな", "黄色の果実は？"]
                 ],
                 [
                     "問題2",
-                    ["山田","林","川","東京都","東京都","日本の首都は？"],
-                    ["ばなな","みかん","いちご","ぶどう","みかん","オレンジ色の果実は？"],
-                    ["りんご","みかん","ばなな","ぶどう","りんご","赤い色の果実は？"],
-                    ["りんご","みかん","いちご","ぶどう","ぶどう","紫色の果実は？"],
-                    ["ばなな","みかん","いちご","ぶどう","ぶどう","紫色の果実は？"]
+                    ["山田", "林", "川", "東京都", "東京都", "日本の首都は？"],
+                    ["ばなな", "みかん", "いちご", "ぶどう", "みかん", "オレンジ色の果実は？"],
+                    ["りんご", "みかん", "ばなな", "ぶどう", "りんご", "赤い色の果実は？"],
+                    ["りんご", "みかん", "いちご", "ぶどう", "ぶどう", "紫色の果実は？"],
+                    ["ばなな", "みかん", "いちご", "ぶどう", "ぶどう", "紫色の果実は？"]
                 ],
                 [
                     "確認用",
-                    ["ばなな","みかん","いちご","ぶどう","ぶどう","紫色の果実は？"]
+                    ["ばなな", "みかん", "いちご", "ぶどう", "ぶどう", "紫色の果実は？"]
                 ]
             ];
+
+            let i = 0;
+            const NOQ = questions.length - 1;
+            while(i<=NOQ) {
+                let forEachItem = `<input type="button" value=${questions[i][0]} class="button" onclick="session(${i});location.href='quiz.html'">`;
+                newQuestion += forEachItem;
+                i++;
+            };
+            newer.innerHTML = newQuestion;
+
             const session = function(int) {
                 let multidimensionarray = questions[int];
             sessionStorage.setItem("array", JSON.stringify(multidimensionarray));
